@@ -1,27 +1,18 @@
 import { contains } from "cypress/types/jquery"
+import { headers } from "linkinator"
+describe("test Author", () => {
+  context("hero section", () => {
+    it("allow users to subscribe to the email list", () => {
+      cy.visit("https://kamora:iamafriend@writersperhour.dev")
+      cy.viewport(1440, 812)
+      cy.get('.cb-enable').click()
+      cy.get(':nth-child(1) > .c-media__txt').contains("We deliver custom written papers that undergo quality checks to ensure they are high on quality, accurate, authentic and original while adhering to your deadlines. With strict policies against plagiarism in place, you are guaranteed to receive only 100% plagiarism free papers from us.")
+    })
+  })
+    
+      // cy.viewport(1440, 812)
+      // cy.get('.cb-enable').click()
+ })
 
-describe("home page", () => {
-  beforeEach (() => {
-    cy.visit("https://writersperhour.com/prices-and-discounts")
-    cy.get('.cb-enable').click()
-  })
-  it("the h1 contains the correct text", () => {
-    cy.viewport(1440, 786)
-    // cy.btn2("p-header-btn__order").click()
-    //cy.get("[data-test='hero-heading']").contains("Testing Next.js ")
-    //cy.get("title").contains("Place an Order - Writers Per Hour")
-    //cy.get("button")
-    cy.typemail("subscribe__input").type("acb@gmail.com")
-    cy.get('#subscribe__form_btn').click()
-  //   // cy.get("id").contains("subscribe__form_btn").click()
-    cy.get('.p-banner-success')
-    cy.get('.p-banner-success__txt').contains("Thanks for the subscription!")
-    cy.get('.p-banner-success__cap').contains("You’ve just made a terrific decision. Please make sure to check your inbox for the discount code.")
-  // })
-  // it.only("Test"),() => {
-  //   cy.visit("https://writersperhour.com/prices-and-discounts")
-  //   cy.get('.cb-enable').click()
-  //   cy.btn2("p-header-btn__order").click()
-  })
-})
+
 
