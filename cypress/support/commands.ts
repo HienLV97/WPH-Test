@@ -16,6 +16,8 @@ Cypress.Commands.add("getClass", (selector) => {
   Cypress.Commands.add("getName", (selector) => {
     return cy.get(`[name=${selector}]`)
   })
+  Cypress.Commands.add('hover', (...args) => {})
+  Cypress.Commands.overwrite('hover', (originalFn, ...otherArgs) => {})
 //   Cypress.Commands.add("btn2", (selector) => {
 //     return cy.get(`[class=${selector}]`)
 //   })
