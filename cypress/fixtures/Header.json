@@ -7,5 +7,15 @@
     "UrlBlogs":"/blog",
     "UrlContact":"/contacts",
     "UrlSignin":"/signin",
-    "UrlOrder": "/order"
+    "UrlOrder": "/order",
+    "hovermouseD72226":"rgb(215, 34, 38)",
+    "TextC3a3a3a":"rgb(58, 58, 58)",
+    "BGFFF":"rgba(0, 0, 0, 0)",
+    "BGNull":"transparent",    
+    "FontWeight":"600",
+    "FontSizeL": "16px",
+    "Padding":"0px 24px",
+    "PaddingAboutUs": "12px 0px 14px",
+    "Fontfamily": "\"Open Sans\", sans-serif"
 }
+    
