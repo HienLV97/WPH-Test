@@ -16,6 +16,7 @@
     "FontSizeL": "16px",
     "Padding":"0px 24px",
     "PaddingAboutUs": "12px 0px 14px",
-    "Fontfamily": "\"Open Sans\", sans-serif"
+    "Fontfamily": "\"Open Sans\", sans-serif",
+    "BolderFF6F6F":"rgb(255, 111, 111)"
 }
     

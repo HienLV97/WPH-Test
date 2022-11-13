@@ -1,10 +1,10 @@
 import { defineConfig } from "cypress";
-
 export default defineConfig({
 
 
   e2e:
   {
+    
     env: {
 
     },
@@ -13,5 +13,7 @@ export default defineConfig({
       // implement node event listeners here
 
     },
+    
   },
+  
 });

@@ -1,5 +1,5 @@
 import cypress from "cypress"
-import { data } from "cypress/types/jquery";
+import { data, type } from "cypress/types/jquery";
 import { Children } from "react"
 import "cypress-real-events";
 import { constant } from "lodash";
@@ -8,6 +8,9 @@ describe("Header", () => {
     beforeEach(function () {
         cy.fixture('Header').then(function (Header) {
             this.Header = Header;
+        })
+        cy.fixture('Url').then(function (Url) {
+            this.Url = Url;
         })
         cy.fixture('example').then(function (bba) {
             this.bba = bba;
@@ -62,11 +65,72 @@ describe("Header", () => {
             cy.get('.p-user-toolbar__a').contains("Sign in").click({ force: true })
             cy.location("pathname").should("eq", this.Header.UrlSignin)
         })
-        it("[Order Now] button", function () {
-            cy.get('.p-header-btn__order').contains("Order Now").click({ force: true })
-            cy.location("pathname").should("eq", this.Header.UrlOrder)
+        context("Incase user signined", function () {
+            context("Signined", function () {
+                beforeEach("Signined", function () {
+                    cy.get('.p-user-toolbar__a').click({ force: true })
+                    cy.get(':nth-child(2) > .layout-form__input-wrap > .layout-form__input')
+                        .type(this.bba.email).and
+                    cy.get(':nth-child(3) > .layout-form__input-wrap > .layout-form__input')
+                        .type(this.bba.passlogin)
+                    cy.get('.layout-form__btn').click({ force: true })
+                    cy.get('.layout-signin__txt--error').should(($error) => {
+                        if ($error.hasClass('layout-signin__txt--error d-block')) {
+                            cy.get('.layout-signin__txt1 > .layout-signin__link').click({ force: true })
+                            cy.get(':nth-child(3) > .layout-form__input-wrap > .layout-form__input')
+                                .type(this.bba.email).and
+                            cy.get('.jsCheckPass')
+                                .type(this.bba.passlogin)
+                            cy.get(':nth-child(2) > .c-checkbox1__label').click({ force: true })
+                            cy.get('.layout-form__btn').click({ force: true })
+                        }
+                    })
+                })
+                it("[Bell] button active", function () {
+                    cy.get('.p-notification__icon > .mw-100').click({ force: true })
+                            .should("be.visible")
+                            .should(([img]) => {
+                                expect(img.naturalWidth).to.equal(24);
+                                expect(img.naturalHeight).to.equal(24);
+                            })
+                            .should('have.css','width','24px')
+                            .should('have.css','height','24px')
+                    
+                })
+                it("Check Account button",function(){
+                    cy.get('.p-user-toolbar__btn > .rounded-circle').should('be.visible').click({force:true})
+                    .should(([img]) => {
+                        expect(img.naturalWidth).to.be.greaterThan(0);
+                        expect(img.naturalHeight).to.be.greaterThan(0);
+                    })
+                    .should('have.css','width','32px')
+                    .should('have.css','height','32px')
+                })
+                context("Insite Account",function(){
+                    it("[Orders] Link", function(){
+                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link').click({force:true})
+                        cy.location('pathname').should("eq",this.Url.Orders)
+                    })
+                    it("[Settings] Link", function(){
+                        cy.get(':nth-child(2) > .p-user-toobar__link').click({force:true})
+                        cy.location('pathname').should("eq",this.Url.Settings)
+                    })
+                    it("[Logout] Link", function(){
+                        cy.get('form > .p-user-toobar__link')
+                        .click({force:true})
+                        cy.location('pathname').should("eq","/")
+                        cy.get('.p-user-toolbar__a').should('be.visible')
+                        //check go to homepage and logouted
+                    })
+                })
+            })
         })
     })
+    it("[Order Now] button", function () {
+        cy.get('.p-header-btn__order').contains("Order Now").click({ force: true })
+        cy.location("pathname").should("eq", this.Header.UrlOrder)
+    })
+
     context("Check UI", function () {
         context("Our Writers", function () {
             it("Check Text-color ", function () {
@@ -253,8 +317,86 @@ describe("Header", () => {
                     .should('have.css', 'font-size', this.Header.FontSizeL)
                     .should('have.css', 'font-family', this.Header.Fontfamily)
             })
+            it("Check arrow icon", function () {
+                cy.viewport(1440, 786)
+                cy.get('.ml-2')
+                    .should("be.visible")
+                    .should(([img]) => {
+                        expect(img.naturalWidth).to.equal(21);
+                        expect(img.naturalHeight).to.equal(20);
+                    })
+                    .should('have.css','width','20px')
+                    .should('have.css','height','20px')
+            })
+            it.only("Check size submenu", function () {
+                cy.get('.p-nav__list > :nth-child(5)').contains("About Us").click({ force: true })
+                cy.get('.p-user-toolbar__lg > .p-user-toolbar__content')
+                .should('have.css','width','182px')
+                .should('have.css','height','167px')
+            })
         })
-        context.only("Insite FAQ", function () {
+        context("Incase user signined", function () {
+            context("Signined", function () {
+                beforeEach("Signined", function () {
+                    cy.get('.p-user-toolbar__a').click({ force: true })
+                    cy.get(':nth-child(2) > .layout-form__input-wrap > .layout-form__input')
+                        .type(this.bba.email).and
+                    cy.get(':nth-child(3) > .layout-form__input-wrap > .layout-form__input')
+                        .type(this.bba.passlogin)
+                    cy.get('.layout-form__btn').click({ force: true })
+                    cy.get('.layout-signin__txt--error').should(($error) => {
+                        if ($error.hasClass('layout-signin__txt--error d-block')) {
+                            cy.get('.layout-signin__txt1 > .layout-signin__link').click({ force: true })
+                            cy.get(':nth-child(3) > .layout-form__input-wrap > .layout-form__input')
+                                .type(this.bba.email).and
+                            cy.get('.jsCheckPass')
+                                .type(this.bba.passlogin)
+                            cy.get(':nth-child(2) > .c-checkbox1__label').click({ force: true })
+                            cy.get('.layout-form__btn').click({ force: true })
+                        }
+                    })
+                })
+                it("Check hover [Account] Link", function () {
+                    cy.get('.p-user-toolbar__btn > .rounded-circle').click({ force: true })
+                    .realHover()
+                    .should('have.css', 'color', this.Header.BolderFF6F6F)
+                    
+                })
+                it("Check size submenu",function(){
+                    cy.get('.p-user-toolbar__btn > .rounded-circle').click({ force: true })
+                    cy.get('.p-user-toolbar > .p-user-toolbar__content')
+                    .should('have.css','width','182px')
+                    .should('have.css','height','176px')
+                })
+                it("Check Account button",function(){
+                    cy.get('.p-user-toolbar__btn > .rounded-circle').should('be.visible').click({force:true})
+                    .should(([img]) => {
+                        expect(img.naturalWidth).to.be.greaterThan(0);
+                        expect(img.naturalHeight).to.be.greaterThan(0);
+                    })
+                    .should('have.css','width','32px')
+                    .should('have.css','height','32px')
+                })
+                context("Insite Account",function(){
+                    it("[Orders] Link", function(){
+                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link').click({force:true})
+                        cy.location('pathname').should("eq",this.Url.Orders)
+                    })
+                    it("[Settings] Link", function(){
+                        cy.get(':nth-child(2) > .p-user-toobar__link').click({force:true})
+                        cy.location('pathname').should("eq",this.Url.Settings)
+                    })
+                    it("[Logout] Link", function(){
+                        cy.get('form > .p-user-toobar__link')
+                        .click({force:true})
+                        cy.location('pathname').should("eq","/")
+                        cy.get('.p-user-toolbar__a').should('be.visible')
+                        //check go to homepage and logouted
+                    })
+                })
+            })
+        })
+        context("Insite About Us", function () {
             beforeEach("Click dropdown", function () {
                 cy.get('.js-dropdow').contains("About Us").click({ force: true })
             })
@@ -369,11 +511,8 @@ describe("Header", () => {
                         .should('have.css', 'font-family', this.Header.Fontfamily)
                 })
             })
-
         })
     })
 })
-
-
 
 
