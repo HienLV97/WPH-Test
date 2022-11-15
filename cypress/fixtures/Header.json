@@ -14,8 +14,10 @@
     "BGNull":"transparent",    
     "FontWeight":"600",
     "FontSizeL": "16px",
+    "FontSizeSubmenu":"14px",
     "Padding":"0px 24px",
     "PaddingAboutUs": "12px 0px 14px",
+    "PaddingSubmenu":"12px 0px",
     "Fontfamily": "\"Open Sans\", sans-serif",
     "BolderFF6F6F":"rgb(255, 111, 111)"
 }

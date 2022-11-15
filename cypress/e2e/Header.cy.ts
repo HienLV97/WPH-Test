@@ -30,9 +30,12 @@ describe("Header", () => {
         })
     })
     context("Link Active", function () {
-        it("Our Writers", function () {
+        it.only("Our Writers", function () {
             cy.get('.p-nav__list > :nth-child(1)').contains("Our Writers").click({ force: true })
             cy.location("pathname").should("eq", this.Header.UrlOurWriters)
+            cy.get('.p-nav__list > :nth-child(1) > .active')
+            .should('have.css','background',this.Header.hovermouseD72226)
+            // .should('have.css','font-weight',('700'))
         })
         it("How It Works", function () {
             cy.get('.p-nav__list > :nth-child(2)').contains("How It Works").click({ force: true })
@@ -88,49 +91,48 @@ describe("Header", () => {
                 })
                 it("[Bell] button active", function () {
                     cy.get('.p-notification__icon > .mw-100').click({ force: true })
-                            .should("be.visible")
-                            .should(([img]) => {
-                                expect(img.naturalWidth).to.equal(24);
-                                expect(img.naturalHeight).to.equal(24);
-                            })
-                            .should('have.css','width','24px')
-                            .should('have.css','height','24px')
-                    
+                        .should("be.visible")
+                        .should(([img]) => {
+                            expect(img.naturalWidth).to.equal(24);
+                            expect(img.naturalHeight).to.equal(24);
+                        })
+                        .should('have.css', 'width', '24px')
+                        .should('have.css', 'height', '24px')
+
                 })
-                it("Check Account button",function(){
-                    cy.get('.p-user-toolbar__btn > .rounded-circle').should('be.visible').click({force:true})
-                    .should(([img]) => {
-                        expect(img.naturalWidth).to.be.greaterThan(0);
-                        expect(img.naturalHeight).to.be.greaterThan(0);
-                    })
-                    .should('have.css','width','32px')
-                    .should('have.css','height','32px')
+                it("Check Account button", function () {
+                    cy.get('.p-user-toolbar__btn > .rounded-circle').should('be.visible').click({ force: true })
+                        .should(([img]) => {
+                            expect(img.naturalWidth).to.be.greaterThan(0);
+                            expect(img.naturalHeight).to.be.greaterThan(0);
+                        })
+                        .should('have.css', 'width', '32px')
+                        .should('have.css', 'height', '32px')
                 })
-                context("Insite Account",function(){
-                    it("[Orders] Link", function(){
-                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link').click({force:true})
-                        cy.location('pathname').should("eq",this.Url.Orders)
+                context("Insite Account", function () {
+                    it("[Orders] Link", function () {
+                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link').click({ force: true })
+                        cy.location('pathname').should("eq", this.Url.Orders)
                     })
-                    it("[Settings] Link", function(){
-                        cy.get(':nth-child(2) > .p-user-toobar__link').click({force:true})
-                        cy.location('pathname').should("eq",this.Url.Settings)
+                    it("[Settings] Link", function () {
+                        cy.get(':nth-child(2) > .p-user-toobar__link').click({ force: true })
+                        cy.location('pathname').should("eq", this.Url.Settings)
                     })
-                    it("[Logout] Link", function(){
+                    it("[Logout] Link", function () {
                         cy.get('form > .p-user-toobar__link')
-                        .click({force:true})
-                        cy.location('pathname').should("eq","/")
+                            .click({ force: true })
+                        cy.location('pathname').should("eq", "/")
                         cy.get('.p-user-toolbar__a').should('be.visible')
                         //check go to homepage and logouted
                     })
                 })
             })
         })
+        it("[Order Now] button", function () {
+            cy.get('.p-header-btn__order').contains("Order Now").click({ force: true })
+            cy.location("pathname").should("eq", this.Header.UrlOrder)
+        })
     })
-    it("[Order Now] button", function () {
-        cy.get('.p-header-btn__order').contains("Order Now").click({ force: true })
-        cy.location("pathname").should("eq", this.Header.UrlOrder)
-    })
-
     context("Check UI", function () {
         context("Our Writers", function () {
             it("Check Text-color ", function () {
@@ -160,12 +162,9 @@ describe("Header", () => {
             })
             it("Check hover mouse ", function () {
                 cy.get('.p-nav__list > :nth-child(1)')
-                    .realHover().and('have.css', 'padding', this.Header.Padding)
+                    .realHover().should('have.css', 'padding', this.Header.Padding)
                     .contains("Our Writers")
                     .should('have.css', 'color', this.Header.hovermouseD72226)
-                    // .realHover().and('have.css', 'padding', this.Header.Padding)
-                    // .contains("Our Writers")
-                    // .should('have.css', 'color', this.Header.hovermouseD72226)
                     .should('have.css', 'font-weight', this.Header.FontWeight)
                     .should('have.css', 'font-size', this.Header.FontSizeL)
                     .should('have.css', 'font-family', this.Header.Fontfamily)
@@ -199,7 +198,7 @@ describe("Header", () => {
             })
             it("Check hover mouse ", function () {
                 cy.get('.p-nav__list > :nth-child(2)')
-                    .realHover().and('have.css', 'padding', this.Header.Padding)
+                    .realHover().should('have.css', 'padding', this.Header.Padding)
                     .contains("How It Works")
                     .should('have.css', 'color', this.Header.hovermouseD72226)
                     .should('have.css', 'font-weight', this.Header.FontWeight)
@@ -235,7 +234,7 @@ describe("Header", () => {
             })
             it("Check hover mouse ", function () {
                 cy.get('.p-nav__list > :nth-child(3)')
-                    .realHover().and('have.css', 'padding', this.Header.Padding)
+                    .realHover().should('have.css', 'padding', this.Header.Padding)
                     .contains("Prices & Discounts")
                     .should('have.css', 'color', this.Header.hovermouseD72226)
                     .should('have.css', 'font-weight', this.Header.FontWeight)
@@ -271,7 +270,7 @@ describe("Header", () => {
             })
             it("Check hover mouse ", function () {
                 cy.get('.p-nav__list > :nth-child(4)')
-                    .realHover().and('have.css', 'padding', this.Header.Padding)
+                    .realHover().should('have.css', 'padding', this.Header.Padding)
                     .contains("Samples")
                     .should('have.css', 'color', this.Header.hovermouseD72226)
                     .should('have.css', 'font-weight', this.Header.FontWeight)
@@ -310,7 +309,7 @@ describe("Header", () => {
             })
             it("Check hover mouse ", function () {
                 cy.get('.p-nav__list > :nth-child(5)')
-                    .realHover().and('have.css', 'padding', this.Header.Padding)
+                    .realHover().should('have.css', 'padding', this.Header.Padding)
                     .contains("About Us")
                     .should('have.css', 'color', this.Header.hovermouseD72226)
                     .should('have.css', 'font-weight', this.Header.FontWeight)
@@ -325,14 +324,14 @@ describe("Header", () => {
                         expect(img.naturalWidth).to.equal(21);
                         expect(img.naturalHeight).to.equal(20);
                     })
-                    .should('have.css','width','20px')
-                    .should('have.css','height','20px')
+                    .should('have.css', 'width', '20px')
+                    .should('have.css', 'height', '20px')
             })
-            it.only("Check size submenu", function () {
+            it("Check size submenu", function () {
                 cy.get('.p-nav__list > :nth-child(5)').contains("About Us").click({ force: true })
                 cy.get('.p-user-toolbar__lg > .p-user-toolbar__content')
-                .should('have.css','width','182px')
-                .should('have.css','height','167px')
+                    .should('have.css', 'width', '182px')
+                    .should('have.css', 'height', '167px')
             })
         })
         context("Incase user signined", function () {
@@ -358,40 +357,156 @@ describe("Header", () => {
                 })
                 it("Check hover [Account] Link", function () {
                     cy.get('.p-user-toolbar__btn > .rounded-circle').click({ force: true })
-                    .realHover()
-                    .should('have.css', 'color', this.Header.BolderFF6F6F)
-                    
+                        .realHover()
+                        .should('have.css', 'color', this.Header.BolderFF6F6F)
                 })
-                it("Check size submenu",function(){
+                it("Check size submenu", function () {
                     cy.get('.p-user-toolbar__btn > .rounded-circle').click({ force: true })
                     cy.get('.p-user-toolbar > .p-user-toolbar__content')
-                    .should('have.css','width','182px')
-                    .should('have.css','height','176px')
+                        .should('have.css', 'width', '182px')
+                        .should('have.css', 'height', '176px')
                 })
-                it("Check Account button",function(){
-                    cy.get('.p-user-toolbar__btn > .rounded-circle').should('be.visible').click({force:true})
-                    .should(([img]) => {
-                        expect(img.naturalWidth).to.be.greaterThan(0);
-                        expect(img.naturalHeight).to.be.greaterThan(0);
+                context("[Orders] link", function () {
+                    beforeEach("click submenu", function () {
+                        cy.get('.p-user-toolbar__btn > .rounded-circle').should('be.visible').click({ force: true })
                     })
-                    .should('have.css','width','32px')
-                    .should('have.css','height','32px')
+                    it("Check Text-color ", function () {
+                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link')
+                            .should('have.css', 'color', this.Header.TextC3a3a3a)
+                    })
+                    it("Check background-color ", function () {
+                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link')
+                            .should('have.css', 'background-color', this.Header.BGFFF)
+                    })
+                    it("Check font-weight ", function () {
+                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link')
+                            .should('have.css', 'font-weight', this.Header.FontWeight)
+                    })
+                    it("Check font-size ", function () {
+                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link')
+                            .should('have.css', 'font-size', this.Header.FontSizeSubmenu)
+                    })
+                    it("Check padding ", function () {
+                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link')
+                            .should('have.css', 'padding', this.Header.PaddingSubmenu)
+
+                    })
+                    it("Check font-family ", function () {
+                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link')
+                            .should('have.css', 'font-family', this.Header.Fontfamily)
+                    })
+                    it("Check hover mouse ", function () {
+                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link')
+                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link')
+                            .realHover()
+                            .contains("Orders")
+                            .should('have.css', 'padding', this.Header.PaddingSubmenu)
+                            .should('have.css', 'color', this.Header.hovermouseD72226)
+                            .should('have.css', 'font-weight', this.Header.FontWeight)
+                            .should('have.css', 'font-size', this.Header.FontSizeSubmenu)
+                            .should('have.css', 'font-family', this.Header.Fontfamily)
+                    })
+                    it("Check icon", function () {
+                        cy.get(':nth-child(1) > .p-user-toobar__link > .fa')
+                            .should('have.class', 'fa fa-list-ul')
+                    })
                 })
-                context("Insite Account",function(){
-                    it("[Orders] Link", function(){
-                        cy.get('.p-user-toolbar__list > :nth-child(1) > .p-user-toobar__link').click({force:true})
-                        cy.location('pathname').should("eq",this.Url.Orders)
+                context("[Settings] Link", function () {
+                    beforeEach("click submenu", function () {
+                        cy.get('.p-user-toolbar__btn > .rounded-circle')
+                            .should('be.visible')
+                            .click({ force: true })
                     })
-                    it("[Settings] Link", function(){
-                        cy.get(':nth-child(2) > .p-user-toobar__link').click({force:true})
-                        cy.location('pathname').should("eq",this.Url.Settings)
+                    it("Check Text-color ", function () {
+                        cy.get(':nth-child(2) > .p-user-toobar__link')
+                            .should('have.css', 'color', this.Header.TextC3a3a3a)
                     })
-                    it("[Logout] Link", function(){
+                    it("Check background-color ", function () {
+                        cy.get(':nth-child(2) > .p-user-toobar__link')
+                            .should('have.css', 'background-color', this.Header.BGFFF)
+                    })
+                    it("Check font-weight ", function () {
+                        cy.get(':nth-child(2) > .p-user-toobar__link')
+                            .should('have.css', 'font-weight', this.Header.FontWeight)
+                    })
+                    it("Check font-size ", function () {
+                        cy.get(':nth-child(2) > .p-user-toobar__link')
+                            .should('have.css', 'font-size', this.Header.FontSizeSubmenu)
+                    })
+                    it("Check padding ", function () {
+                        cy.get(':nth-child(2) > .p-user-toobar__link')
+                            .should('have.css', 'padding', this.Header.PaddingSubmenu)
+
+                    })
+                    it("Check font-family ", function () {
+                        cy.get(':nth-child(2) > .p-user-toobar__link')
+                            .should('have.css', 'font-family', this.Header.Fontfamily)
+                    })
+                    it("Check hover mouse ", function () {
+                        cy.get(':nth-child(2) > .p-user-toobar__link')
+                            .realHover().contains("Settings")
+                            .should('have.css', 'padding', this.Header.PaddingSubmenu)
+                            .should('have.css', 'color', this.Header.hovermouseD72226)
+                            .should('have.css', 'font-weight', this.Header.FontWeight)
+                            .should('have.css', 'font-size', this.Header.FontSizeSubmenu)
+                            .should('have.css', 'font-family', this.Header.Fontfamily)
+                    })
+                    it("Check icon", function () {
+                        cy.get(':nth-child(2) > .p-user-toobar__link > .fa')
+                            .should('have.class', 'fa fa-cog')
+                    })
+                })
+
+                context("[Logout] Link", function () {
+                    beforeEach("click submenu", function () {
+                        cy.get('.p-user-toolbar__btn > .rounded-circle')
+                            .should('be.visible')
+                            .click({ force: true })
+                    })
+                    it("Check Text-color ", function () {
                         cy.get('form > .p-user-toobar__link')
-                        .click({force:true})
-                        cy.location('pathname').should("eq","/")
-                        cy.get('.p-user-toolbar__a').should('be.visible')
-                        //check go to homepage and logouted
+                            .should('have.css', 'color', this.Header.TextC3a3a3a)
+                    })
+                    it("Check background-color ", function () {
+                        cy.get('form > .p-user-toobar__link')
+                            .should('have.css', 'background-color', this.Header.BGFFF)
+                    })
+                    it("Check font-weight ", function () {
+                        cy.get('form > .p-user-toobar__link')
+                            .should('have.css', 'font-weight', this.Header.FontWeight)
+                    })
+                    it("Check font-size ", function () {
+                        cy.get('form > .p-user-toobar__link')
+                            .should('have.css', 'font-size', this.Header.FontSizeSubmenu)
+                    })
+                    it("Check padding ", function () {
+                        cy.get('form > .p-user-toobar__link')
+                            .should('have.css', 'padding', this.Header.PaddingSubmenu)
+
+                    })
+                    it("Check font-family ", function () {
+                        cy.get('form > .p-user-toobar__link')
+                            .should('have.css', 'font-family', this.Header.Fontfamily)
+                    })
+                    it("Check hover mouse ", function () {
+                        cy.get('form > .p-user-toobar__link')
+                            .realHover()
+                            .contains('Logout')
+                            .should('have.css', 'padding', this.Header.PaddingSubmenu)
+                            .should('have.css', 'color', this.Header.hovermouseD72226)
+                            .should('have.css', 'font-weight', this.Header.FontWeight)
+                            .should('have.css', 'font-size', this.Header.FontSizeSubmenu)
+                            .should('have.css', 'font-family', this.Header.Fontfamily)
+                    })
+                    it("Check icon", function () {
+                        cy.get('.p-user-toobar__link > img')
+                            .should("be.visible")
+                            .should(([img]) => {
+                                expect(img.naturalWidth).to.equal(17);
+                                expect(img.naturalHeight).to.equal(16);
+                            })
+                            .should('have.css', 'width', '16px')
+                            .should('have.css', 'height', '16px')
                     })
                 })
             })
@@ -430,7 +545,7 @@ describe("Header", () => {
                     cy.get('.p-user-toolbar__list > :nth-child(1) > a')
                         .realHover()
                         .should('have.css', 'color', this.Header.hovermouseD72226)
-                        .and('have.css', 'padding', this.Header.PaddingAboutUs)
+                        .should('have.css', 'padding', this.Header.PaddingAboutUs)
                         .contains("FAQ")
                         .should('have.css', 'font-weight', this.Header.FontWeight)
                         .should('have.css', 'font-size', this.Header.FontSizeL)
@@ -467,7 +582,7 @@ describe("Header", () => {
                     cy.get('.p-user-toolbar__list > :nth-child(2) > a')
                         .realHover()
                         .should('have.css', 'color', this.Header.hovermouseD72226)
-                        .and('have.css', 'padding', this.Header.PaddingAboutUs)
+                        .should('have.css', 'padding', this.Header.PaddingAboutUs)
                         .contains("Blogs")
                         .should('have.css', 'font-weight', this.Header.FontWeight)
                         .should('have.css', 'font-size', this.Header.FontSizeL)
@@ -504,7 +619,7 @@ describe("Header", () => {
                     cy.get('.p-user-toolbar__list > :nth-child(3) > a')
                         .realHover()
                         .should('have.css', 'color', this.Header.hovermouseD72226)
-                        .and('have.css', 'padding', this.Header.PaddingAboutUs)
+                        .should('have.css', 'padding', this.Header.PaddingAboutUs)
                         .contains("Contact")
                         .should('have.css', 'font-weight', this.Header.FontWeight)
                         .should('have.css', 'font-size', this.Header.FontSizeL)

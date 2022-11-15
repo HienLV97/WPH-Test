@@ -1,3 +1,6 @@
+import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
+addMatchImageSnapshotCommand();
+
 /// <reference types="cypress" />
 
 Cypress.Commands.add("getClass", (selector) => {
