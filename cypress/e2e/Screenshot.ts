@@ -36,6 +36,7 @@ describe("Header", () => {
             cy.viewport(1440, 786)
             cy.get('.cb-enable').click({ force: true })
             cy.wait(1000)
+            cy.screenshot('first')
         })
     })
 })

@@ -14,7 +14,7 @@ describe("Header", () => {
         })
         cy.fixture('example').then(function (bba) {
             this.bba = bba;
-            cy.visit("/order", {
+            cy.visit("/order-new", {
                 auth: {
                     username: bba.id,
                     password: 'iamafriend'
@@ -30,7 +30,7 @@ describe("Header", () => {
         })
     })
     context("Link Active", function () {
-        it.only("Our Writers", function () {
+        it("Our Writers", function () {
             cy.get('.p-nav__list > :nth-child(1)').contains("Our Writers").click({ force: true })
             cy.location("pathname").should("eq", this.Header.UrlOurWriters)
             cy.get('.p-nav__list > :nth-child(1) > .active')

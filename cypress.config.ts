@@ -9,6 +9,8 @@ export default defineConfig({
   //     addMatchImageSnapshotPlugin(on, config);
   // },
   // ...restConfigs
+  projectId: 'svm6or', // <- add this line,
+  videoCompression: 15,
   e2e:
   {
 
