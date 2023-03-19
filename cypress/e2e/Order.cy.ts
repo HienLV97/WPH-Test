@@ -2,14 +2,32 @@ import { contains } from "cypress/types/jquery"
 import { globby } from "globby"
 import { headers } from "linkinator"
 describe("test Order function", () => {
-    beforeEach(() => {
-        cy.visit("https://writersperhour.host/")
-        cy.viewport(1440,812)
-        cy.get('.cb-enable').click()
-      })
-    it("test", () =>{
+    beforeEach(function () {
+        cy.fixture('Header').then(function (Header) {
+            this.Header = Header;
+        })
+        cy.fixture('Url').then(function (Url) {
+            this.Url = Url;
+        })
+        cy.fixture('example').then(function (bba) {
+            this.bba = bba;
+            cy.visit("/", {
+                auth: {
+                    username: bba.id,
+                    password: 'iamafriend'
+                }
+            })
+            cy.viewport(1440, 786)
+            // cy.get('.cb-enable').click()
+            // Cypress.on('uncaught:exception', (err, runnable) => {
+            //     // returning false here prevents Cypress from
+            //     // failing the test
+            //     return false
+            // })
+        })
+    })
+    it("test", () => {
         //cy.visit("http://localhost:3000")
-        
         cy.get('.p-header-btn__order').click()
         cy.get(':nth-child(1) > .form-content > .jcc-element > [data-toggle="1"]').click()
         cy.get(':nth-child(2) > .form-content > .chosen').select('Analysis Paper')
@@ -18,16 +36,16 @@ describe("test Order function", () => {
         cy.getClass("form-control").type("Quynh")
         cy.getName("instructions").type("dien")
         cy.get('#btnnext').click()
-    // })
-    // it("step 2", () => {
+        // })
+        // it("step 2", () => {
         cy.get('.form-elements.u-mb-32 > .form-content > .c-input-number > .qtyplus').click()
         cy.getDataType('checkbox').click()
         cy.get('[data-toggle="5"]').click()
         cy.get(':nth-child(2) > .form-content > .jcc-element > [data-toggle="1"]').click().contains("SINGLE")
-        for(let n = 1; n < 5; n++){
-        cy.get(':nth-child(10) > .form-content > .c-input-number > .qtyplus').click({ multiple: true })
+        for (let n = 1; n < 5; n++) {
+            cy.get(':nth-child(10) > .form-content > .c-input-number > .qtyplus').click({ multiple: true })
         }
-        cy.get(':nth-child(11) > .form-content > .c-input-number > .qtyplus').click()     
+        cy.get(':nth-child(11) > .form-content > .c-input-number > .qtyplus').click()
         cy.get('[data-prp-description="High-rank professional writer, proficient in the requested field of study"]').click()
         cy.get('[data-prp-description="Standard price"]').click()
         cy.getClass("btnnext").click()
@@ -39,13 +57,7 @@ describe("test Order function", () => {
         cy.get('.payment > :nth-child(2)').click()
         cy.get('.payment > :nth-child(1)').click()
         cy.get('.btn-green').click()
-
-
-    
-    
-    
-    
-    })   
+    })
 })
 
 

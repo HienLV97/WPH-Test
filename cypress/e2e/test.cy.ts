@@ -1,58 +1,43 @@
 import cypress from "cypress"
-import { data } from "cypress/types/jquery";
+import { data, type } from "cypress/types/jquery";
 import { Children } from "react"
+import "cypress-real-events";
+import { constant } from "lodash";
+import { beforeEach } from "mocha";
+import { stringify } from "gray-matter";
+Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
 
 
-describe("home page", () => {
-    beforeEach(function () {
-        cy.fixture('Header').then(function (Header) {
-            this.Header = Header;
+describe('Test all links on the homepage', () => {
+    it('Check all links', () => {
+
+        cy.viewport(1440, 812)
+        cy.visit('/essay-writers')
+        Cypress.on('uncaught:exception', (error) => {
+            // do something with the error, such as logging it or displaying a message to the user
+            console.log(error)
+            return false
         })
-        cy.fixture('example').then(function (bba) {
-            this.bba = bba;
 
-            cy.viewport(1440, 786)
-
+        cy.get('a').each(($link) => {
+            console.log($link)
+            var newURL = $link.prop('href')
+            console.log(newURL)
+            if (newURL != "javascript:void(0)") {
+                it('Check all links', () => {
+                    var URLbase = "https://kamora:iamafriend@"
+                    // var a = "https://writersperhour.dev/singup"
+                    var test1 = newURL.replace("https://", "")
+                    console.log(test1)
+                    test1 = URLbase + test1
+                    console.log(test1)
+                    cy.visit(test1)
+                    cy.get("title").should("not.have.text", "Page Not Found - Writers Per Hour")
+                })
+            }
         })
     })
-    context("test", function () {
-        it("test1", function () {
-            cy.visit("/", {
-                auth: {
-                    username: this.bba.id,
-                    password: 'iamafriend'
-                }
-            })
-            cy.get('.cb-enable').click()
-            Cypress.on('uncaught:exception', (err, runnable) => {
-                // returning false here prevents Cypress from
-                // failing the test
-                return false
-            })
-            cy.task('Matching image snapshot')
-            cy.get('#header')
-                .invoke('css', 'position', 'actual')
-                .invoke('css', 'z-index', '9999')
-                .matchImageSnapshot()
-        })
-        it("logined", function () {
-            cy.get('#header')
-                .invoke('css', 'position', 'actual')
-                .invoke('css', 'z-index', '9999')
-                .matchImageSnapshot()
-            cy.get('.p-user-toolbar__a').click({ force: true })
-            cy.get(':nth-child(2) > .layout-form__input-wrap > .layout-form__input')
-                .type(this.bba.email).and
-            cy.get(':nth-child(3) > .layout-form__input-wrap > .layout-form__input')
-                .type(this.bba.passlogin)
-            cy.get('.layout-form__btn').click({ force: true })
-            cy.task('Matching image snapshot')
-            cy.get('#header')
-                .invoke('css', 'position', 'actual')
-                .invoke('css', 'z-index', '9999')
-                .matchImageSnapshot()
-        })
-
-    })
-
 })
+
+
+// })

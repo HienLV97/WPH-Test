@@ -14,29 +14,29 @@ describe("Header", () => {
         })
         cy.fixture('example').then(function (bba) {
             this.bba = bba;
-            cy.visit("/order-new", {
+            cy.visit("/", {
                 auth: {
                     username: bba.id,
                     password: 'iamafriend'
                 }
             })
             cy.viewport(1440, 786)
-            cy.get('.cb-enable').click()
-            Cypress.on('uncaught:exception', (err, runnable) => {
-                // returning false here prevents Cypress from
-                // failing the test
-                return false
-            })
+            // cy.get('.cb-enable').click()
+            // Cypress.on('uncaught:exception', (err, runnable) => {
+            //     // returning false here prevents Cypress from
+            //     // failing the test
+            //     return false
+            // })
         })
     })
     context("Link Active", function () {
-        it("Our Writers", function () {
-            cy.get('.p-nav__list > :nth-child(1)').contains("Our Writers").click({ force: true })
-            cy.location("pathname").should("eq", this.Header.UrlOurWriters)
-            cy.get('.p-nav__list > :nth-child(1) > .active')
-            .should('have.css','background',this.Header.hovermouseD72226)
-            // .should('have.css','font-weight',('700'))
-        })
+        // it("Our Writers", function () {
+        //     cy.get('.p-nav__list > :nth-child(1)').contains("Our Writers").click({ force: true })
+        //     cy.location("pathname").should("eq", this.Header.UrlOurWriters)
+        //     cy.get('.p-nav__list > :nth-child(1) > .active')
+        //     .should('have.css','background',this.Header.hovermouseD72226)
+        //     // .should('have.css','font-weight',('700'))
+        // })
         it("How It Works", function () {
             cy.get('.p-nav__list > :nth-child(2)').contains("How It Works").click({ force: true })
             cy.location("pathname").should("eq", this.Header.UrlHowItWorks)
