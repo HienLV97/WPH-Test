@@ -9,11 +9,13 @@ Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
 function checkLink(link){
     cy.visit('/')
     cy.get("title").should("not.have.text", "Page Not Found - Writers Per Hour")
- }
- 
+    
+}
+const newURL = ["/signin","/signup","/order"] 
+
  describe("Test all links", () => {
-     const links = ['/about-us','/signin']
-     links.forEach((link) => {
+    //  const links = ['/about-us','/signin']
+    newURL.forEach((link) => {
          it(`URL should contain ${link}`, () => {
              console.log(link)
              cy.wrap(link).as('url')
