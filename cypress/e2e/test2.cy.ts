@@ -6,38 +6,30 @@ import { constant } from "lodash";
 import { beforeEach } from "mocha";
 import { stringify } from "gray-matter";
 Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
-
-
-describe('Test all links on the homepage', () => {
-    it('Check all links', () => {
-
-        cy.viewport(1440, 812)
-        cy.visit('/essay-writers')
-        Cypress.on('uncaught:exception', (error) => {
-            // do something with the error, such as logging it or displaying a message to the user
-            console.log(error)
-            return false
-        })
-
-        cy.get('a').each(($link) => {
-            console.log($link)
-            var newURL = $link.prop('href')
-            console.log(newURL)
-            if (newURL != "javascript:void(0)") {
-
-                var URLbase = "https://kamora:iamafriend@"
-                // var a = "https://writersperhour.dev/singup"
-                var test1 = newURL.replace("https://", "")
-                console.log(test1)
-                test1 = URLbase + test1
-                console.log(test1)
-                cy.visit(test1)
-                cy.get("title").should("not.have.text", "Page Not Found - Writers Per Hour")
-            }
-        })
+function getURL(getUrl) {
+    cy.visit('/')
+    cy.get('a').each(($link) => {
+        console.log($link)
+        var newURL = $link.prop('href')
+        // console.log(newURL)
+        // cy.wrap(newURL).as('newURL1')
+        // Cypress.env('textURL', newURL);
+        // console.log('Hien1: '+newURL)
     })
+}
+
+
+
+function checkLink() {
+    cy.visit('/')
+   return cy.get("title").should("not.have.text", "Page Not Found - Writers Per Hour")
+
+}
+// const newURL = ["/signin", "/:buy-capstone-project", "/order"]
+
+it("text", ()=>{
+    cy.visit("/")
+    cy.viewport(1440,821)
+    // checkLink()
+    console.log(getURL())
 })
-
-
-
-// })

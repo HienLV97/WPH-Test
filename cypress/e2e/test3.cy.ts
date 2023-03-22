@@ -11,7 +11,7 @@ function checkLink(link){
     cy.get("title").should("not.have.text", "Page Not Found - Writers Per Hour")
     
 }
-const newURL = ["/signin","/signup","/order"] 
+const newURL = ["/signin","/signup","/orderaaa"] 
 
  describe("Test all links", () => {
     //  const links = ['/about-us','/signin']
@@ -24,3 +24,50 @@ const newURL = ["/signin","/signup","/order"]
      })
  })
  
+
+ Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
+
+
+describe('Test all links on the homepage', () => {
+    it('Check all links', () => {
+
+        cy.viewport(1440, 812)
+        cy.visit('/essay-writers')
+        Cypress.on('uncaught:exception', (error) => {
+            // do something with the error, such as logging it or displaying a message to the user
+            console.log(error)
+            return false
+        })
+
+        cy.get('a').each(($link) => {
+            console.log($link)
+            var newURL = $link.prop('href')
+            console.log(newURL)
+            if (newURL != "javascript:void(0)") {
+                var URLbase = "https://kamora:iamafriend@"
+                // var a = "https://writersperhour.dev/singup"
+                var test1 = newURL.replace("https://", "")
+                console.log(test1)
+                test1 = URLbase + test1
+                console.log(test1)
+                cy.visit(test1)
+                cy.get("title").should("not.have.text", "Page Not Found - Writers Per Hour")
+            }
+        })
+    })
+})
+
+describe('Tests', () => {
+    let links // Khởi tạo biến `links`
+  
+    it('Fetches all links', () => {
+      cy.visit('/')
+      cy.getLinks().then(result => {
+        links = result // Gán giá trị vào biến `links`
+      })
+    })
+  
+    it('Displays fetched links', () => {
+      console.log(links) // Sử dụng lại biến `links`
+    })
+  })
