@@ -31,5 +31,5 @@ it("text", ()=>{
     cy.visit("/")
     cy.viewport(1440,821)
     // checkLink()
-    console.log(getURL())
+    // console.log(getURL())
 })

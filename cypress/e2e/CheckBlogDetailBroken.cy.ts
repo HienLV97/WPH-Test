@@ -32,7 +32,7 @@ const newURL = [
 ,"/how-to-write-a-good-lesson-plan"
 ,"/best-online-jobs-for-students"
 ,"/best-notetaking-apps-for-college-students"
-,"lication-essay-tips-that-will-get-you-accepted"
+,"/lication-essay-tips-that-will-get-you-accepted"
 ,"/tok-exhibition-objects-ideas-to-consider"
 ,"/active-voice-vs-passive-voice-in-essay-writing"
 ,"/what-is-formal-academic-writing"
@@ -150,8 +150,6 @@ describe("Test all links", () => {
          it(`Link: ${link}`, () => {
             cy.visit(`/blog${link}`)
             cy.get("title").should("not.have.text", "Page Not Found - Writers Per Hour")
-            //  console.log(link)
-            //  cy.wrap(link).as('url')
          })
      })
  })

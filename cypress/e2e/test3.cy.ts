@@ -56,18 +56,3 @@ describe('Test all links on the homepage', () => {
         })
     })
 })
-
-describe('Tests', () => {
-    let links // Khởi tạo biến `links`
-  
-    it('Fetches all links', () => {
-      cy.visit('/')
-      cy.getLinks().then(result => {
-        links = result // Gán giá trị vào biến `links`
-      })
-    })
-  
-    it('Displays fetched links', () => {
-      console.log(links) // Sử dụng lại biến `links`
-    })
-  })
