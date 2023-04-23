@@ -1,0 +1,11 @@
+{
+    "genieai.openai.apiBaseUrl": "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",
+    "bracket-pair-colorizer-2.scopeLineCSS": [
+
+        "borderStyle : solid",
+        "borderWidth : 1px",
+        "borderColor : {color}",
+        "opacity: 0.5"
+    ],
+    "genieai.openai.organization": "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"
+}

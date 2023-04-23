@@ -1,58 +1,30 @@
-import cypress from "cypress"
-import { data, type } from "cypress/types/jquery";
-import { Children } from "react"
-import "cypress-real-events";
-import { constant } from "lodash";
-import { beforeEach } from "mocha";
-import { stringify } from "gray-matter";
-Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
-function checkLink(link){
-    cy.visit('/')
-    cy.get("title").should("not.have.text", "Page Not Found - Writers Per Hour")
-    
-}
-const newURL = ["/signin","/signup","/orderaaa"] 
 
- describe("Test all links", () => {
+import { stringify } from "gray-matter";
+import { Html } from "next/document";
+Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
+// Cypress.config('baseUrl', 'https://writersperhour.com/')
+const newURL = [
+    "/term-paper-vs-research-paper"
+]
+
+describe("Test all links", () => {
     //  const links = ['/about-us','/signin']
     newURL.forEach((link) => {
-         it(`URL should contain ${link}`, () => {
-             console.log(link)
-             cy.wrap(link).as('url')
-             checkLink(link)
-         })
-     })
- })
- 
-
- Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
-
-
-describe('Test all links on the homepage', () => {
-    it('Check all links', () => {
-
-        cy.viewport(1440, 812)
-        cy.visit('/essay-writers')
-        Cypress.on('uncaught:exception', (error) => {
-            // do something with the error, such as logging it or displaying a message to the user
-            console.log(error)
-            return false
+        it(`Link: ${link}`, () => {
+            cy.visit(`/blog${link}`).get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+            Cypress.on('uncaught:exception', (error) => {
+                console.log(error)
+                return false
+            })
+            cy.get('html').as('hi')
+            console.log('@hi')
+            //  var html = 
+            // cy.visit('/order')
+            // cy.get(':nth-child(6) > .form-content > .form-control').type(html)
         })
+   // cy.wrap(newURL).as('newURL1')
+        // Cypress.env('textURL', newURL);
+        // console.log('Hien1: '+newURL)
 
-        cy.get('a').each(($link) => {
-            console.log($link)
-            var newURL = $link.prop('href')
-            console.log(newURL)
-            if (newURL != "javascript:void(0)") {
-                var URLbase = "https://kamora:iamafriend@"
-                // var a = "https://writersperhour.dev/singup"
-                var test1 = newURL.replace("https://", "")
-                console.log(test1)
-                test1 = URLbase + test1
-                console.log(test1)
-                cy.visit(test1)
-                cy.get("title").should("not.have.text", "Page Not Found - Writers Per Hour")
-            }
-        })
     })
 })

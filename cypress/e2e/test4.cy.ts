@@ -1,101 +1,93 @@
-import cypress from "cypress"
-import { data, type } from "cypress/types/jquery";
-import { Children } from "react"
-import "cypress-real-events";
-import { constant } from "lodash";
-import { beforeEach } from "mocha";
+
 import { stringify } from "gray-matter";
 Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
-describe('Tests', () => {
-    let links // Khởi tạo biến `links`
-    let test1
-    let test2
-    it('Check all links', () => {
-        cy.viewport(1440, 812)
-        cy.visit('/')
-        Cypress.on('uncaught:exception', (error) => {
-            // do something with the error, such as logging it or displaying a message to the user
-            console.log(error)
-            return false
-        })
-        cy.get('a').each(($link) => {
-            console.log($link)
-            links = $link.prop('href')
-            // console.log(links)
-            // if (newURL != "javascript:void(0)") {
-
-            //     var URLbase = "https://kamora:iamafriend@"
-            //     // var a = "https://writersperhour.dev/singup"
-            //     var test1 = newURL.replace("https://", "")
-            //     console.log(test1)
-            //     test1 = URLbase + test1
-            //     console.log(test1)
-            //     cy.visit(test1)
-            //     cy.get("title").should("not.have.text", "Page Not Found - Writers Per Hour")
-            // }
+// Cypress.config('baseUrl', 'https://writersperhour.com/')
+var newURL =
+    [
+        '/how-it-works',
+        '/prices-and-discounts',
+        '/samples',
+        '/signin',
+        '/order',
+        '/orders/active',
+        '/orders/unpaid',
+        '/orders/completed',
+        '/orders/canceled',
+        '/signup',
+        '/essay-writers',
+        '/essay-writers',
+        '/ib-writers',
+        '/mba-essay-writers',
+        '/phd-papers',
+        '/how-it-works',
+        '/testimonials',
+        '/samples',
+        '/prices-and-discounts',
+        '/fast-essay-writer',
+        '/order',
+        '/help',
+        '/contacts',
+        '/prices-and-discounts',
+        '/policy/refund',
+        '/privacy-policy',
+        '/pay-to-do-term-paper',
+        '/write-my-annotated-bibliography',
+        '/paper-editing-service',
+        '/analysis-papers',
+        '/biology-papers',
+        '/buy-personal-statement',
+        '/write-my-speech',
+        '/buy-research-proposal',
+        '/write-my-book-report',
+        '/argumentative-essay-writer',
+        '/business-plan-writers',
+        '/buy-college-papers',
+        '/creative-writers',
+        '/dissertation-writer',
+        '/do-my-powerpoint',
+        '/do-my-research-paper',
+        '/extended-essay-writer',
+        '/fast-essay-writer',
+        '/homework-writers',
+        '/ib-internal-assessment',
+        '/phd-papers',
+        '/tok_essay',
+        '/write-my-assignment',
+        '/write-my-discussion-post-for-me',
+        '/write-my-essay-please',
+        '/write-my-lab-report',
+        '/write-my-literature-review',
+        '/write-my-paper',
+        '/write-my-thesis',
+        '/essay-writers',
+        '/ib-writers',
+        '/how-it-works',
+        '/prices-and-discounts',
+        '/samples',
+        '/help',
+        '/blog',
+        '/contacts',
+        '/testimonials',
+        '/about',
+        '/privacy-policy',
+        '/policy/refund',
+        '/cookie-policy',
+        '/policy/revision',
+        '/terms-and-conditions',
+        '/policy/acceptable',
+    ];
+    var uniqueArr = newURL.filter((value, index, self) => {
+        return self.includes(value, index + 1) === false;
+      });
+describe("Test all links", () => {
+    //  const links = ['/about-us','/signin']
+    uniqueArr.forEach((link) => {
+        it(`Link: ${link}`, () => {
+            cy.visit(`/${link}`).get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+            Cypress.on('uncaught:exception', (error) => {
+                console.log(error)
+                return false
+            })
         })
     })
-    it('Displays fetched links', () => {
-        console.log(links) // Sử dụng lại biến `links`
-
-        if (links != "javascript:void(0)") {
-            var URLbase = "https://kamora:iamafriend@"
-            // var a = "https://writersperhour.dev/singup"
-            test1 = links.replace("https://", "")
-            // console.log(test1)
-            test2 = URLbase + test1
-            // console.log(test1)
-            // cy.visit(test1)
-            // cy.get("title").should("not.have.text", "Page Not Found - Writers Per Hour")
-        }
-    })
-
-    // it(`Check url ${test2}`, () => {
-    //     cy.visit(Cypress.env('test1'))
-    //     console.log(link)
-    //     cy.wrap(link).as('url')
-    //     checkLink(link)
-    //     cy.get("title").should("not.have.text", "Page Not Found - Writers Per Hour")
-    // })
-
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// it("takes URL", () => {
-//     cy.visit("/")
-//     cy.get('a').each(($link) => {
-//       const newURL = $link.prop('href')
-//     //   console.log(newURL)
-//       cy.wrap(newURL).as('newURL1')
-//     }).then(() => {
-//       const newURL = Cypress.env('newURL1')
-//     //   console.log(newURL)
-//     })
-//   })
-//   it("takes URL", () => {``
-//     console.log('@newURL')
-//   })
-
-// it("Test all links", () => {
-//     newURL.forEach((link) => {
-//          it(`URL should contain ${link}`, () => {
-//              console.log(link)
-//              cy.wrap(link).as('url')
-//             //  checkLink(link)
-//          })
-//      })
-//  })
-
-
