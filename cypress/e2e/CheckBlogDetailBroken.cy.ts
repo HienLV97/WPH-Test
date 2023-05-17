@@ -1,19 +1,15 @@
 
 import { stringify } from "gray-matter";
-Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
-// Cypress.config('baseUrl', 'https://writersperhour.com/')
+// Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
+Cypress.config('baseUrl', 'https://writersperhour.com/')
 const newURL = [
     "/test-case-fail"
     ,"/term-paper-vs-research-paper"
     ,"/tips-to-choose-strong-analysis-paper-topics"
     ,"/best-practices-for-writing-college-summary"
-    , "/how-to-fluff-an-essay"
-    ,"/test-case-fail"
+    ,"/how-to-fluff-an-essay"
     , "/how-to-write-a-dissertation-defense"
     , "/how-to-increase-your-typing-speed"
-    , "/how-to-write-an-executive-summary-for-an-essay"
-    , "/what-is-dbq-essay"
-    , "/how-to-write-a-good-professional-summary-for-a-resume"
     , "/how-to-write-an-executive-summary-for-an-essay"
     , "/what-is-dbq-essay"
     , "/how-to-write-a-good-professional-summary-for-a-resume"
@@ -154,3 +150,11 @@ describe("Test all links", () => {
         })
     })
 })
+
+
+// , "/how-to-write-an-executive-summary-for-an-essay"
+// describe("Test all links", () => {
+//     it(`Link:`, () => {
+//     cy.visit("/blog/how-to-write-an-executive-summary-for-an-essay")
+//     })
+// })

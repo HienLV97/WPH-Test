@@ -1,30 +1,56 @@
-
-import { stringify } from "gray-matter";
-import { Html } from "next/document";
-Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
-// Cypress.config('baseUrl', 'https://writersperhour.com/')
-const newURL = [
-    "/term-paper-vs-research-paper"
-]
-
-describe("Test all links", () => {
-    //  const links = ['/about-us','/signin']
-    newURL.forEach((link) => {
-        it(`Link: ${link}`, () => {
-            cy.visit(`/blog${link}`).get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-            Cypress.on('uncaught:exception', (error) => {
-                console.log(error)
-                return false
+import "cypress-real-events";
+import { forEach } from "lodash";
+Cypress.config('baseUrl',
+    'https://kamora:iamafriend@writersperhour.dev/')
+describe("test", () => {
+    context("Test link blog detail broken", () => {
+        // const pagesNumbers = 20;
+        // for (var page = 0; page < pagesNumbers; page++) {
+            it(`Page ${1}`, () => {
+                // console.log(page)
+                cy.viewport(1440, 900)
+                cy.visit(`/blog/page/${1}`)
+                cy.getClass('item-link').eq(0).click()
+                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+                // cy.visit(`/blog/page/${page}`)
+                // cy.getClass('item-link').eq(1).click()
+                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+                // cy.visit(`/blog/page/${page}`)
+                // cy.getClass('item-link').eq(2).click()
+                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+                // cy.visit(`/blog/page/${page}`)
+                // cy.getClass('item-link').eq(3).click()
+                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+                // cy.visit(`/blog/page/${page}`)
+                // cy.getClass('item-link').eq(4).click()
+                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+                // cy.visit(`/blog/page/${page}`)
+                // cy.getClass('item-link').eq(5).click()
+                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
             })
-            cy.get('html').as('hi')
-            console.log('@hi')
-            //  var html = 
-            // cy.visit('/order')
-            // cy.get(':nth-child(6) > .form-content > .form-control').type(html)
-        })
-   // cy.wrap(newURL).as('newURL1')
-        // Cypress.env('textURL', newURL);
-        // console.log('Hien1: '+newURL)
-
+        // }
     })
 })
+                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+                // cy.getClass('item-link').eq(1).click()
+                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+                // cy.getClass('item-link').eq(2).click()
+                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+                // cy.getClass('item-link').eq(3).click()
+                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+                // cy.getClass('item-link').eq(4).click()
+                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+                // cy.getClass('item-link').eq(5).click()
+                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+
+        // it("Page 1", () => {
+        //     cy.viewport(1440, 900)
+        //     cy.visit(`/blog/pages/${pages}`)
+        //     cy.getClass('item-link').eq(0).click()
+        //     cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
+        //     // Cypress.on('uncaught:exception', (error) => {
+        //     //     console.log(error)
+        //     //     return false
+        //     // })
+        // })
+
