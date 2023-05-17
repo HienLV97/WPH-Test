@@ -1,56 +1,51 @@
 import "cypress-real-events";
 import { forEach } from "lodash";
-Cypress.config('baseUrl',
-    'https://kamora:iamafriend@writersperhour.dev/')
-describe("test", () => {
-    context("Test link blog detail broken", () => {
-        // const pagesNumbers = 20;
-        // for (var page = 0; page < pagesNumbers; page++) {
-            it(`Page ${1}`, () => {
-                // console.log(page)
-                cy.viewport(1440, 900)
-                cy.visit(`/blog/page/${1}`)
-                cy.getClass('item-link').eq(0).click()
-                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-                // cy.visit(`/blog/page/${page}`)
-                // cy.getClass('item-link').eq(1).click()
-                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-                // cy.visit(`/blog/page/${page}`)
-                // cy.getClass('item-link').eq(2).click()
-                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-                // cy.visit(`/blog/page/${page}`)
-                // cy.getClass('item-link').eq(3).click()
-                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-                // cy.visit(`/blog/page/${page}`)
-                // cy.getClass('item-link').eq(4).click()
-                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-                // cy.visit(`/blog/page/${page}`)
-                // cy.getClass('item-link').eq(5).click()
-                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-            })
-        // }
+Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
+// Cypress.config('baseUrl', 'https://writersperhour.com/')
+const pagesNumbers = 21;
+for (var page = 1; page <= pagesNumbers; page++) {
+  (function (currentPage) {
+    describe(`Page ${currentPage}`, () => {
+      beforeEach(() => {
+        cy.viewport(1440, 760);
+        cy.visit(`/blog/page/${currentPage}`)
+      })
+      it("Link 1", () => {
+        cy.get(':nth-child(1) > .item-link > .title').click({force: true})
+          .get('title').should('not.contain', "Page Not Found - Writers Per Hour")
+          .location("pathname").should("not.eq", `/blog/page/${currentPage}`)
+        // .get(".about-us", { timeout: 8000 }).should("contain", "About us")
+      })
+      it("Link 2", () => {
+        cy.get(':nth-child(2) > .item-link > .title').click({force: true})
+          .get('title').should('not.contain', "Page Not Found - Writers Per Hour")
+          .location("pathname").should("not.eq", `/blog/page/${currentPage}`)
+        // .get(".about-us", { timeout: 8000 }).should("contain", "About us")
+      })
+      it("Link 3", () => {
+        cy.get(':nth-child(3) > .item-link > .title').click({force: true})
+          .get('title').should('not.contain', "Page Not Found - Writers Per Hour")
+          .location("pathname").should("not.eq", `/blog/page/${currentPage}`)
+        // .get(".about-us", { timeout: 8000 }).should("contain", "About us")
+      })
+      it("Link 4", () => {
+        cy.get(':nth-child(4) > .item-link > .title').click({force: true})
+          .get('title').should('not.contain', "Page Not Found - Writers Per Hour")
+          .location("pathname").should("not.eq", `/blog/page/${currentPage}`)
+        // .get(".about-us", { timeout: 8000 }).should("contain", "About us")
+      })
+      it("Link 5", () => {
+        cy.get(':nth-child(5) > .item-link > .title').click({force: true})
+          .get('title').should('not.contain', "Page Not Found - Writers Per Hour")
+          .location("pathname").should("not.eq", `/blog/page/${currentPage}`)
+        // .get(".about-us", { timeout: 8000 }).should("contain", "About us")
+      })
+      it("Link 6", () => {
+        cy.get(':nth-child(6) > .item-link > .title').click({force: true})
+          .get('title').should('not.contain', "Page Not Found - Writers Per Hour")
+          .location("pathname").should("not.eq", `/blog/page/${currentPage}`)
+        // .get(".about-us", { timeout: 8000 }).should("contain", "About us")
+      })
     })
-})
-                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-                // cy.getClass('item-link').eq(1).click()
-                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-                // cy.getClass('item-link').eq(2).click()
-                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-                // cy.getClass('item-link').eq(3).click()
-                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-                // cy.getClass('item-link').eq(4).click()
-                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-                // cy.getClass('item-link').eq(5).click()
-                // cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-
-        // it("Page 1", () => {
-        //     cy.viewport(1440, 900)
-        //     cy.visit(`/blog/pages/${pages}`)
-        //     cy.getClass('item-link').eq(0).click()
-        //     cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist")
-        //     // Cypress.on('uncaught:exception', (error) => {
-        //     //     console.log(error)
-        //     //     return false
-        //     // })
-        // })
-
+  })(page)
+}
