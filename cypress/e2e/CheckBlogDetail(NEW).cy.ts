@@ -1,9 +1,8 @@
 import "cypress-real-events";
 import { forEach } from "lodash";
-// Cypress.config('baseUrl',
-// 'https://kamora:iamafriend@writersperhour.dev/')
-Cypress.config('baseUrl', 'https://writersperhour.com/')
-const pagesNumbers = 24;
+Cypress.config('baseUrl','https://kamora:iamafriend@writersperhour.dev/')
+// Cypress.config('baseUrl', 'https://writersperhour.com/')
+const pagesNumbers = 21;
 for (var page = 1; page <= pagesNumbers; page++) {
   (function (currentPage) {
     describe(`Page ${currentPage}`, () => {
@@ -38,7 +37,7 @@ for (var page = 1; page <= pagesNumbers; page++) {
       })
       it("Link 6", () => {
         cy.viewport(1440, 760);
-        cy.getClass('item-link').eq(5).click()
+        cy.get('.item-link').eq(5).click()
         cy.get('h1').should('not.contain', "Oops, the page you were looking for doesn't exist");
       })
     })
