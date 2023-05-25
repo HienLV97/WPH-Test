@@ -22,6 +22,9 @@ Cypress.Commands.add("getClass", (selector) => {
   Cypress.Commands.add("getTitle", (selector) => {
     return cy.get(`[title=${selector}]`)
   })
+  Cypress.Commands.add("getPlaceHolder", (selector) => {
+    return cy.get(`[placeholder=${selector}]`)
+  })
   Cypress.Commands.add('hover', (...args) => {})
   Cypress.Commands.overwrite('hover', (originalFn, ...otherArgs) => {})
 //   Cypress.Commands.add("btn2", (selector) => {
