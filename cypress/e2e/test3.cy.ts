@@ -1,51 +1,81 @@
 import "cypress-real-events";
-import { forEach } from "lodash";
+import { InvalidEmail, ValidEmail } from "../e2e/constants1.js";
 Cypress.config('baseUrl', 'https://kamora:iamafriend@writersperhour.dev/')
 // Cypress.config('baseUrl', 'https://writersperhour.com/')
-const pagesNumbers = 21;
-for (var page = 1; page <= pagesNumbers; page++) {
-  (function (currentPage) {
-    describe(`Page ${currentPage}`, () => {
-      beforeEach(() => {
-        cy.viewport(1440, 760);
-        cy.visit(`/blog/page/${currentPage}`)
-      })
-      it("Link 1", () => {
-        cy.get(':nth-child(1) > .item-link > .title').click({force: true})
-          .get('title').should('not.contain', "Page Not Found - Writers Per Hour")
-          .location("pathname").should("not.eq", `/blog/page/${currentPage}`)
-        // .get(".about-us", { timeout: 8000 }).should("contain", "About us")
-      })
-      it("Link 2", () => {
-        cy.get(':nth-child(2) > .item-link > .title').click({force: true})
-          .get('title').should('not.contain', "Page Not Found - Writers Per Hour")
-          .location("pathname").should("not.eq", `/blog/page/${currentPage}`)
-        // .get(".about-us", { timeout: 8000 }).should("contain", "About us")
-      })
-      it("Link 3", () => {
-        cy.get(':nth-child(3) > .item-link > .title').click({force: true})
-          .get('title').should('not.contain', "Page Not Found - Writers Per Hour")
-          .location("pathname").should("not.eq", `/blog/page/${currentPage}`)
-        // .get(".about-us", { timeout: 8000 }).should("contain", "About us")
-      })
-      it("Link 4", () => {
-        cy.get(':nth-child(4) > .item-link > .title').click({force: true})
-          .get('title').should('not.contain', "Page Not Found - Writers Per Hour")
-          .location("pathname").should("not.eq", `/blog/page/${currentPage}`)
-        // .get(".about-us", { timeout: 8000 }).should("contain", "About us")
-      })
-      it("Link 5", () => {
-        cy.get(':nth-child(5) > .item-link > .title').click({force: true})
-          .get('title').should('not.contain', "Page Not Found - Writers Per Hour")
-          .location("pathname").should("not.eq", `/blog/page/${currentPage}`)
-        // .get(".about-us", { timeout: 8000 }).should("contain", "About us")
-      })
-      it("Link 6", () => {
-        cy.get(':nth-child(6) > .item-link > .title').click({force: true})
-          .get('title').should('not.contain', "Page Not Found - Writers Per Hour")
-          .location("pathname").should("not.eq", `/blog/page/${currentPage}`)
-        // .get(".about-us", { timeout: 8000 }).should("contain", "About us")
-      })
+
+describe("home page", () => {
+    // beforeEach(() => {
+    //     cy.fixture('example.json').as('exampleData');
+    //     cy.fixture('example.json').as('exampleData');
+    //     cy.viewport(1440, 760);
+    // })
+    context("Negative", function () {
+        it("From '/signin'", function () {
+            cy.visit("/signin")
+            cy.contains("Sign Up")
+                .click()
+                .get("h1")
+                .contains("SIGN UP")
+        })
+        it("By URL", function () {
+            cy.get("h1")
+                .contains("SIGN UP")
+        })
     })
-  })(page)
-}
+    context("Invalid email", function () {
+        InvalidEmail.forEach((value) => {
+            it(`Input email: ${value}`, () => {
+                cy.getPlaceHolder("Email")
+                    .type(`${value}`)
+                cy.getPlaceHolder("Password")
+                    .type("123123")
+                cy.getType("submit")
+                    .click()
+                cy.getClass("text-error").eq(0)
+                    .should("contain", "The email must be a valid email address")
+            })
+        })
+    })
+    // context.only("Valid email", function () {
+    //     ValidEmail.forEach((value) => {
+    //         it(`Input email: ${value}`, () => {
+    //             cy.viewport(1440, 760);
+    //             cy.visit("/signup")
+    //             cy.getPlaceHolder("Email")
+    //                 .type(`${value}`)
+    //             cy.getPlaceHolder("Password")
+    //                 .type("123123")
+    //             cy.getClass("label-checkbox")
+    //                 .click({ focus: true })
+    //             cy.get('.button')
+    //                 .click()
+    //             .wait(10000)
+    //             // cy.get('.p-user-toolbar__a')
+    //             //     .click({ force: true })
+    //         })
+    //     })
+    // })
+
+    it("Testcase", function () {
+        cy.visit("/signin")
+        cy.viewport(1440, 760);
+        cy.get(':nth-child(1) > div > .input-text').type("43333313314abc@mail.cc")
+        cy.get(':nth-child(2) > div > .input-text').type("123123")
+        cy.get('.button').click()
+    })
+    it.only(`Input email: `, () => {
+        cy.visit("/signup")
+        cy.viewport(1440, 760);
+        cy.getPlaceHolder("Email")
+            .type("t123@32g.c")
+        cy.getPlaceHolder("Password")
+            .type("123123")
+        cy.get('.label-checkbox')
+            .click({ force: true })
+        cy.getType("submit")
+            .click({ force: true })
+        cy.window().then((win) => {
+            win.localStorage.setItem("user", JSON.stringify({ email: "t123@2g.c" }));
+        });
+    })
+})

@@ -19,13 +19,10 @@ describe("home page", () => {
         })
         cy.viewport(1440, 786)
     })
-    it("Testcase", function () {
+    it.only("Testcase", function () {
         cy.get('.cb-enable').click()
-        cy.get(':nth-child(3) > .layout-form__input-wrap > .layout-form__input').type(this.data.email)
-        cy.get(':nth-child(4) > .layout-form__input-wrap > .layout-form__input').type("1")
-        cy.get('.jsCheckPass').type(this.data.pass)
-        cy.get(':nth-child(2) > .c-checkbox1__label').click({ force: true })
-        cy.get('.layout-form__btn').click()
-        cy.get('.layout-form__btn').click()
+        cy.get(':nth-child(1) > div > .input-text').type("43333313314abc@mail.cc")
+        cy.get(':nth-child(2) > div > .input-text').type("123123")
+        cy.get('.button').click()
     })
 })
