@@ -74,8 +74,5 @@ describe("home page", () => {
             .click({ force: true })
         cy.getType("submit")
             .click({ force: true })
-        cy.window().then((win) => {
-            win.localStorage.setItem("user", JSON.stringify({ email: "t123@2g.c" }));
-        });
     })
 })
