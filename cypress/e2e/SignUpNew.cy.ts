@@ -38,7 +38,7 @@ describe("home page", () => {
         ValidEmail.forEach((value) => {
             it(`Input email: ${value}`, () => {
                 cy.getPlaceHolder("Email")
-                    .type('')
+                    .type(`${value}`)
                 cy.getPlaceHolder("Password").type("123123")
                 cy.getClass("label-checkbox").click({ focus: true })
                 cy.getType("submit").click()
