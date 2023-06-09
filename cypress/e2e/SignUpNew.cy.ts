@@ -44,6 +44,6 @@ describe("home page", () => {
                 cy.getType("submit").click()
                 cy.contains("Balance")
             })
-        })
+        })a
     })
 })
