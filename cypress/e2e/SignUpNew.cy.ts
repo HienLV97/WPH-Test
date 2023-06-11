@@ -23,18 +23,18 @@ describe("home page", () => {
                 .contains("SIGN UP")
         })
     })
-    context("Invalid email", function () {
+    context.only("Invalid email", function () {
         InvalidEmail.forEach((value) => {
             it(`Input email: ${value}`, () => {
                 cy.getPlaceHolder("Email").type(`${value}`)
                 cy.getPlaceHolder("Password").type("123123")
                 cy.getType("submit").click()
                 cy.getClass("text-error").eq(0)
-                    .should("contain", "The email must be a valid email address")
+                    .should("contain", "The email must be a valid email address.")
             })
         })
     })
-    context.only("Valid email", function () {
+    context("Valid email", function () {
         ValidEmail.forEach((value) => {
             it(`Input email: ${value}`, () => {
                 cy.getPlaceHolder("Email")
@@ -44,6 +44,6 @@ describe("home page", () => {
                 cy.getType("submit").click()
                 cy.contains("Balance")
             })
-        })a
+        })
     })
 })
